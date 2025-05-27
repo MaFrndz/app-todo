@@ -1,17 +1,22 @@
 <div class="login-container p-d-flex p-jc-center p-ai-center" style="min-height: 60vh;">
     <div class="p-card p-p-4" style="width: 350px;">
-        <h2 class="p-text-center">Login</h2>
+        <div class="p-d-flex p-jc-center p-mb-3">
+            <img src="assets/login-user.png" alt="Login"
+                style="width: 80px; height: 80px; border-radius: 50%; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+        </div>
+        <h2 class="p-text-center p-mb-4">Login</h2>
         <form>
-            <div class="p-field p-mb-3">
+            <div class="p-field p-mb-4">
                 <label for="username" class="p-d-block">Usuario</label>
                 <input id="username" type="text" pInputText class="p-inputtext p-d-block" placeholder="Usuario" />
             </div>
-            <div class="p-field p-mb-3">
+            <div class="p-field p-mb-4">
                 <label for="password" class="p-d-block">Contraseña</label>
                 <input id="password" type="password" pInputText class="p-inputtext p-d-block"
                     placeholder="Contraseña" />
             </div>
-            <button pButton type="submit" label="Entrar" class="p-button p-button-primary p-w-100"></button>
+            <button pButton type="submit" label="Entrar"
+                class="p-button p-button-primary p-w-100 p-mt-2"></button>
         </form>
     </div>
 </div>
