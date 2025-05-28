@@ -1,0 +1,11 @@
+<header class="header p-3 surface-100 flex align-items-center justify-content-between">
+    <div class="logo text-xl font-bold">App Todo</div>
+    <nav class="flex align-items-center">
+        <span class="ml-3 font-medium">Hola, {{dataLogin()?.firstName}} {{dataLogin()?.lastName}}</span>
+        <button pButton type="button"
+            class="p-button-rounded p-button-text ml-3" (click)="logout()" title="Cerrar sesión"
+            icon="pi pi-sign-out">
+        </button>
+
+    </nav>
+</header>

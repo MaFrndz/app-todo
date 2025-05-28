@@ -1,4 +1,31 @@
-<div class="home-container">
-  <h2>Bienvenido a la Home</h2>
-  <!-- Contenido principal aquí -->
+<div class="card flex flex-wrap gap-4">
+    <div class="p-2 border border-surface rounded-border w-60">
+      <p>Lista 1</p>
+        <ul class="list-none  flex-col gap-2 p-0 m-0"
+            cdkDropList
+            [cdkDropListData]="availableProducts"
+            [cdkDropListConnectedTo]="['selectedProductsList']"
+            (cdkDropListDropped)="drop($event)">
+            <li
+                *ngFor="let product of availableProducts"
+                class="p-2 rounded-border shadow-sm flex items-center"
+                style="display: flex; align-items: center; background: #fff; border: 1px solid #e0e0e0; margin-bottom: 8px; min-height: 40px;"
+                cdkDrag>
+                    {{product.name}}
+            </li>
+        </ul>
+    </div>
+    <div class="p-2 border border-surface rounded-border w-60">
+        <p class="text-center border-surface border-b">Lista 2</p>
+        <ul class="list-none flex-col gap-2 p-0 m-0"
+            cdkDropList
+            #selectedProductsList="cdkDropList"
+            [cdkDropListData]="selectedProducts"
+            [cdkDropListConnectedTo]="['availableProductsList']"
+            (cdkDropListDropped)="drop($event)">
+            <li *ngFor="let product of selectedProducts" class="p-2 rounded-border shadow-sm flex items-center" style="display: flex; align-items: center; background: #fff; border: 1px solid #e0e0e0; margin-bottom: 8px; min-height: 40px;" cdkDrag>
+                {{product.name}}
+            </li>
+        </ul>
+    </div>
 </div>

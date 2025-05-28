@@ -7,4 +7,7 @@ export interface LoginResponse {
   notBeforePolicy: number;
   sessionState: string;
   scope: string;
+  firstName: string;
+  lastName: string;
+
 }

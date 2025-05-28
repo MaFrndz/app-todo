@@ -11,9 +11,11 @@ export class AuthService {
   private readonly loginData = signal<LoginResponse | null>(null);
 
   constructor(private readonly http: HttpClient) {
-    const saved = localStorage.getItem('loginData');
-    if (saved) {
-      this.loginData.set(JSON.parse(saved));
+    if (typeof window !== 'undefined' && window.localStorage) {
+      const saved = localStorage.getItem('loginData');
+      if (saved) {
+        this.loginData.set(JSON.parse(saved));
+      }
     }
   }
 
@@ -22,7 +24,9 @@ export class AuthService {
   }
 
   logout(data: LoginResponse): Observable<any> {
-    localStorage.removeItem('loginData');
+    if (typeof window !== 'undefined' && window.localStorage) {
+      localStorage.removeItem('loginData');
+    }
     return this.http.post(`${this.apiUrl}/logout`, data.refreshToken);
   }
   getDataLogin() {
@@ -31,6 +35,8 @@ export class AuthService {
   }
   setLoginData(data: LoginResponse) {
     this.loginData.set(data);
-    localStorage.setItem('loginData', JSON.stringify(data));
+    if (typeof window !== 'undefined' && window.localStorage) {
+      localStorage.setItem('loginData', JSON.stringify(data));
+    }
   }
 }
