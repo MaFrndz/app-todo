@@ -1,14 +1,18 @@
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { HomeComponent } from './components/home/home.component';
-import { LoginComponent } from './components/login/login.component';
+import { ToastModule } from 'primeng/toast';
+import { AuthInterceptor } from './services/auth.interceptor';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, LoginComponent, HomeComponent],
+  imports: [RouterOutlet, ToastModule],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrl: './app.component.scss',
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+  ]
 })
 export class AppComponent {
   title = 'app-todo';

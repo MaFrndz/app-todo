@@ -1,22 +1,26 @@
-<div class="login-container p-d-flex p-jc-center p-ai-center" style="min-height: 60vh;">
-    <div class="p-card p-p-4" style="width: 350px;">
-        <div class="p-d-flex p-jc-center p-mb-3">
-            <img src="assets/login-user.png" alt="Login"
-                style="width: 80px; height: 80px; border-radius: 50%; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
-        </div>
-        <h2 class="p-text-center p-mb-4">Login</h2>
-        <form>
-            <div class="p-field p-mb-4">
-                <label for="username" class="p-d-block">Usuario</label>
-                <input id="username" type="text" pInputText class="p-inputtext p-d-block" placeholder="Usuario" />
-            </div>
-            <div class="p-field p-mb-4">
-                <label for="password" class="p-d-block">Contraseña</label>
-                <input id="password" type="password" pInputText class="p-inputtext p-d-block"
-                    placeholder="Contraseña" />
-            </div>
-            <button pButton type="submit" label="Entrar"
-                class="p-button p-button-primary p-w-100 p-mt-2"></button>
-        </form>
+<div class="flex justify-content-center align-items-center min-h-screen surface-ground">
+  <div class="surface-card p-4 shadow-2 border-round w-full sm:w-20rem">
+    <div class="text-center mb-4">
+      <i class="pi pi-user text-4xl text-primary"></i>
+      <h2 class="mt-2 mb-0">Iniciar Sesión</h2>
     </div>
+
+    <form (ngSubmit)="login()">
+      <div class="field mb-3">
+        <label for="username" class="block mb-2">Usuario</label>
+        <input id="username" type="text" pInputText [(ngModel)]="username" name="username" class="w-full" required />
+      </div>
+
+      <div class="field mb-3">
+        <label for="password" class="block mb-2">Contraseña</label>
+        <input id="password" type="password" pPassword [(ngModel)]="password" name="password" class="w-full" required />
+      </div>
+
+      <div class="text-right mb-3">
+        <a href="#" class="text-sm text-primary">¿Olvidaste tu contraseña?</a>
+      </div>
+
+      <button pButton type="submit" label="Entrar" class="w-full" [disabled]="!username || !password"></button>
+    </form>
+  </div>
 </div>
