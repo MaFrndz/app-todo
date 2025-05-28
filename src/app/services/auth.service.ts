@@ -10,15 +10,20 @@ export class AuthService {
   private readonly apiUrl = environment.apiUrl;
   private readonly loginData = signal<LoginResponse | null>(null);
 
-  constructor(private readonly http: HttpClient) { 
-   }
+  constructor(private readonly http: HttpClient) {
+    const saved = localStorage.getItem('loginData');
+    if (saved) {
+      this.loginData.set(JSON.parse(saved));
+    }
+  }
 
   login(data: LoginRequest): Observable<LoginResponse> {
     return this.http.post<LoginResponse>(`${this.apiUrl}/login`, data);
   }
 
-  logout(): Observable<any> {
-    return this.http.post(`${this.apiUrl}/logout`, '"string"');
+  logout(data: LoginResponse): Observable<any> {
+    localStorage.removeItem('loginData');
+    return this.http.post(`${this.apiUrl}/logout`, data.refreshToken);
   }
   getDataLogin() {
     return this.loginData.asReadonly();
@@ -26,5 +31,6 @@ export class AuthService {
   }
   setLoginData(data: LoginResponse) {
     this.loginData.set(data);
+    localStorage.setItem('loginData', JSON.stringify(data));
   }
 }

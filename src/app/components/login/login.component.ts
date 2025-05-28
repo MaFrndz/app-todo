@@ -40,9 +40,4 @@ export class LoginComponent {
             }
         });
     }
-
-    ver(){
-        console.log(this.dataLogin());
-    }
-
 }
