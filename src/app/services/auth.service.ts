@@ -8,10 +8,10 @@ import { LoginResponse } from '../models/auth/login-response.model';
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   private readonly apiUrl = environment.apiUrl;
+  private readonly loginData = signal<LoginResponse | null>(null);
 
-  loginResponse = signal<LoginResponse | null>(null);
-
-  constructor(private readonly http: HttpClient) {}
+  constructor(private readonly http: HttpClient) { 
+   }
 
   login(data: LoginRequest): Observable<LoginResponse> {
     return this.http.post<LoginResponse>(`${this.apiUrl}/login`, data);
@@ -19,5 +19,12 @@ export class AuthService {
 
   logout(): Observable<any> {
     return this.http.post(`${this.apiUrl}/logout`, '"string"');
+  }
+  getDataLogin() {
+    return this.loginData.asReadonly();
+
+  }
+  setLoginData(data: LoginResponse) {
+    this.loginData.set(data);
   }
 }

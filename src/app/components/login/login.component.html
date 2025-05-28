@@ -8,19 +8,19 @@
     <form (ngSubmit)="login()">
       <div class="field mb-3">
         <label for="username" class="block mb-2">Usuario</label>
-        <input id="username" type="text" pInputText [(ngModel)]="username" name="username" class="w-full" required />
+        <input id="username" type="text" pInputText [(ngModel)]="loginRequest.username" name="username" class="w-full" required />
       </div>
 
       <div class="field mb-3">
         <label for="password" class="block mb-2">Contraseña</label>
-        <input id="password" type="password" pPassword [(ngModel)]="password" name="password" class="w-full" required />
+        <input id="password" type="password" pPassword [(ngModel)]="loginRequest.password" name="password" class="w-full" required />
       </div>
 
       <div class="text-right mb-3">
         <a href="#" class="text-sm text-primary">¿Olvidaste tu contraseña?</a>
       </div>
 
-      <button pButton type="submit" label="Entrar" class="w-full" [disabled]="!username || !password"></button>
+      <button pButton type="submit" label="Entrar" class="w-full" [disabled]="!loginRequest.username || !loginRequest.password"></button>
     </form>
   </div>
 </div>
