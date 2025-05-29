@@ -1,10 +1,13 @@
-import { CommonModule, NgFor } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { CardModule } from 'primeng/card';
 import { DragDropModule } from 'primeng/dragdrop';
+
 
 export interface Product {
   id: string;
-  name: string;
+  titulo: string;
+  descripcion: string
 }
 
 @Component({
@@ -12,7 +15,7 @@ export interface Product {
   standalone: true,
   imports: [
     DragDropModule,
-    NgFor,
+    CardModule,
     CommonModule
   ],
   templateUrl: './home.component.html',
@@ -26,8 +29,8 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.selectedProducts = [];
     this.availableProducts = [
-      { id: '1', name: 'Black Watch' },
-      { id: '2', name: 'Bamboo Watch' }
+      { id: '1', titulo: 'Tarea 1' , descripcion: 'Descripcion tarea 1' },
+      { id: '2', titulo: 'Tarea 2', descripcion: 'Descripcion tarea 2' },
     ];
   }
 

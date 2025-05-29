@@ -1,22 +1,32 @@
 <div class="card flex flex-wrap gap-4">
-    <div class="p-2 border border-surface rounded-border w-60">
-        <ul class="list-none flex flex-col gap-2 p-0 m-0">
-            <li
-                *ngFor="let product of availableProducts"
-                class="p-2 rounded-border shadow-sm"
-                pDraggable
-                (onDragStart)="dragStart(product)"
-                (onDragEnd)="dragEnd()">
-                    {{product.name}}
+    <div class="p-2">
+        <h2>Estado 1</h2>
+        <ul class="lista-limpia">
+            @for (tarea of availableProducts; track tarea.id) {
+            <li pDraggable (onDragStart)="dragStart(tarea)" (onDragEnd)="dragEnd()" style="margin-bottom: 1rem;">
+                <p-card [header]="tarea.titulo">
+                    <p class="m-0">
+                        {{tarea.descripcion}}
+                    </p>
+                </p-card>
             </li>
+            }
         </ul>
     </div>
-    <div class="p-2 border border-surface rounded-border w-60" pDroppable (onDrop)="drop()">
-        <p class="text-center border-surface border-b">Drop Zone</p>
-        <ul class="list-none flex flex-col gap-2 p-0 m-0" *ngIf="selectedProducts" >
-            <li *ngFor="let product of selectedProducts" class="p-2 rounded-border shadow-sm">
-                {{product.name}}
+
+
+    <div class="p-2 " pDroppable (onDrop)="drop()">
+        <h2>Estado 2</h2>
+        <ul *ngIf="selectedProducts" class="lista-limpia">
+            @for (tarea of selectedProducts; track tarea.id) {
+            <li class="p-2 rounded-border shadow-sm" style="margin-bottom: 1rem;">
+                <p-card [header]="tarea.titulo">
+                    <p class="m-0">
+                        {{tarea.descripcion}}
+                    </p>
+                </p-card>
             </li>
+            }
         </ul>
     </div>
 </div>
