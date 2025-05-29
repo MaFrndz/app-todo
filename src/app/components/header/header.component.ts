@@ -1,4 +1,3 @@
-import { NgIf } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 import { AuthService } from '../../services/auth.service';
@@ -8,7 +7,7 @@ import { AuthService } from '../../services/auth.service';
   standalone: true,
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
-  imports: [NgIf, ButtonModule],
+  imports: [ ButtonModule],
 })
 export class HeaderComponent {
   private readonly authService = inject(AuthService);

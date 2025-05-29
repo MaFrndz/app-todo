@@ -1,6 +1,6 @@
-import { CdkDragDrop, DragDropModule, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { CommonModule, NgFor } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { DragDropModule } from 'primeng/dragdrop';
 
 export interface Product {
   id: string;
@@ -10,13 +10,6 @@ export interface Product {
 @Component({
   selector: 'app-home',
   standalone: true,
-  styles: [
-    `:host ::ng-deep {
-            [pDraggable] {
-                cursor: move;
-            }
-        }`
-  ],
   imports: [
     DragDropModule,
     NgFor,
@@ -28,6 +21,7 @@ export interface Product {
 export class HomeComponent implements OnInit {
   availableProducts: Product[] = [];
   selectedProducts: Product[] = [];
+  draggedProduct: Product | null = null;
 
   ngOnInit() {
     this.selectedProducts = [];
@@ -37,17 +31,26 @@ export class HomeComponent implements OnInit {
     ];
   }
 
-  drop(event: CdkDragDrop<Product[]>) {
-    console.log('Drop event:', event);
-    if (event.previousContainer === event.container) {
-      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-    } else {
-      transferArrayItem(
-        event.previousContainer.data,
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex
-      );
+  dragStart(product: Product) {
+    this.draggedProduct = product;
+  }
+
+  drop() {
+    if (this.draggedProduct) {
+      const draggedProductIndex = this.findIndex(this.draggedProduct);
+      if (draggedProductIndex > -1) {
+        this.selectedProducts = [...this.selectedProducts, this.draggedProduct];
+        this.availableProducts = this.availableProducts.filter((_, i) => i !== draggedProductIndex);
+      }
+      this.draggedProduct = null;
     }
+  }
+
+  dragEnd() {
+    this.draggedProduct = null;
+  }
+
+  findIndex(product: Product): number {
+    return this.availableProducts.findIndex(p => p.id === product.id);
   }
 }

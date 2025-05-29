@@ -1,29 +1,20 @@
 <div class="card flex flex-wrap gap-4">
     <div class="p-2 border border-surface rounded-border w-60">
-      <p>Lista 1</p>
-        <ul class="list-none  flex-col gap-2 p-0 m-0"
-            cdkDropList
-            [cdkDropListData]="availableProducts"
-            [cdkDropListConnectedTo]="['selectedProductsList']"
-            (cdkDropListDropped)="drop($event)">
+        <ul class="list-none flex flex-col gap-2 p-0 m-0">
             <li
                 *ngFor="let product of availableProducts"
-                class="p-2 rounded-border shadow-sm flex items-center"
-                style="display: flex; align-items: center; background: #fff; border: 1px solid #e0e0e0; margin-bottom: 8px; min-height: 40px;"
-                cdkDrag>
+                class="p-2 rounded-border shadow-sm"
+                pDraggable
+                (onDragStart)="dragStart(product)"
+                (onDragEnd)="dragEnd()">
                     {{product.name}}
             </li>
         </ul>
     </div>
-    <div class="p-2 border border-surface rounded-border w-60">
-        <p class="text-center border-surface border-b">Lista 2</p>
-        <ul class="list-none flex-col gap-2 p-0 m-0"
-            cdkDropList
-            #selectedProductsList="cdkDropList"
-            [cdkDropListData]="selectedProducts"
-            [cdkDropListConnectedTo]="['availableProductsList']"
-            (cdkDropListDropped)="drop($event)">
-            <li *ngFor="let product of selectedProducts" class="p-2 rounded-border shadow-sm flex items-center" style="display: flex; align-items: center; background: #fff; border: 1px solid #e0e0e0; margin-bottom: 8px; min-height: 40px;" cdkDrag>
+    <div class="p-2 border border-surface rounded-border w-60" pDroppable (onDrop)="drop()">
+        <p class="text-center border-surface border-b">Drop Zone</p>
+        <ul class="list-none flex flex-col gap-2 p-0 m-0" *ngIf="selectedProducts" >
+            <li *ngFor="let product of selectedProducts" class="p-2 rounded-border shadow-sm">
                 {{product.name}}
             </li>
         </ul>
