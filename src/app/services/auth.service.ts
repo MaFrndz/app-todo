@@ -7,7 +7,7 @@ import { LoginResponse } from '../models/auth/login-response.model';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  private readonly apiUrl = environment.apiUrl;
+  private readonly apiUrl = environment.apiUrl + '/auth';
   private readonly loginData = signal<LoginResponse | null>(null);
 
   constructor(private readonly http: HttpClient) {

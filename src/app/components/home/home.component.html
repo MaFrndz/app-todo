@@ -1,5 +1,23 @@
 <div class="card flex flex-wrap gap-4">
-    <div class="p-2">
+
+    @for (state of states; track $index) {
+    <div class="p-2" pDroppable (onDrop)="drop()">
+        <h2>{{state.stateDescription}}</h2>
+
+        <ul class="lista-limpia">
+            @for (tarea of availableProducts; track tarea.id) {
+            <li pDraggable (onDragStart)="dragStart(tarea)" (onDragEnd)="dragEnd()" style="margin-bottom: 1rem;">
+                <p-card [header]="tarea.titulo">
+                    <p class="m-0">
+                        {{tarea.descripcion}}
+                    </p>
+                </p-card>
+            </li>
+            }
+        </ul>
+    </div>
+    }
+    <!-- <div class="p-2">
         <h2>Estado 1</h2>
         <ul class="lista-limpia">
             @for (tarea of availableProducts; track tarea.id) {
@@ -28,5 +46,5 @@
             </li>
             }
         </ul>
-    </div>
+    </div> -->
 </div>

@@ -1,7 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CardModule } from 'primeng/card';
 import { DragDropModule } from 'primeng/dragdrop';
+import { State } from '../../models/state/state.model';
+import { StateService } from '../../services/state.service';
 
 
 export interface Product {
@@ -22,16 +24,25 @@ export interface Product {
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
+
+  stateService = inject(StateService);
+
   availableProducts: Product[] = [];
   selectedProducts: Product[] = [];
   draggedProduct: Product | null = null;
+  states: State[] = [];
+
 
   ngOnInit() {
     this.selectedProducts = [];
     this.availableProducts = [
-      { id: '1', titulo: 'Tarea 1' , descripcion: 'Descripcion tarea 1' },
+      { id: '1', titulo: 'Tarea 1', descripcion: 'Descripcion tarea 1' },
       { id: '2', titulo: 'Tarea 2', descripcion: 'Descripcion tarea 2' },
     ];
+    this.stateService.getStates().subscribe(
+      states => {
+      this.states = states;
+    });
   }
 
   dragStart(product: Product) {
